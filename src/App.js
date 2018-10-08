@@ -18,6 +18,7 @@ class App extends React.Component {
 
   getWeather = async (e) => {
     e.preventDefault();
+    
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}s&appid=${API_KEY}&units=metric`);
@@ -29,7 +30,7 @@ class App extends React.Component {
         country: data.sys.country,
         humidity: data.main.humidity,
         description: data.weather[0].description,
-        err: ""
+        error: ""
       });
     } else {
       this.setState({
@@ -55,7 +56,7 @@ class App extends React.Component {
                 <div className="col-xs-7 form-container">
                   <Form getWeather={this.getWeather} />
                   <Weather
-                    temperature={this.state.temperature}
+                    temprature={this.state.temprature}
                     humidity={this.state.humidity}
                     city={this.state.city}
                     country={this.state.country}
